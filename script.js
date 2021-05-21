@@ -20,14 +20,14 @@ function valPrincipal()
 	return true;
 }
 
-function highlight(text) {
-  var inputText = document.getElementById("result");
-  var innerHTML = inputText.innerHTML;
-  var index = innerHTML.indexOf(text);
-  if (index >= 0) { 
-   innerHTML = innerHTML.substring(0,index) + "<span class='marca'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
-   inputText.innerHTML = innerHTML;
-  }
+function highlight(text,pos) {
+ 	var inputText = document.getElementById("result");
+  	var innerHTML = inputText.innerHTML;
+  	var index = innerHTML.indexOf(text,pos);
+  	if (index >= 0){
+	   	innerHTML = innerHTML.substring(0,index) + "<span class='marca'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);		
+		inputText.innerHTML = innerHTML;
+  	}
 }
 
 // funcion para generar el calculo de interes ganado
@@ -41,13 +41,11 @@ function compute()
 	    var years = document.getElementById("years").value;
 	    var interest = parseInt(years) * (parseInt(p) * (parseFloat(rate) /100));
 	    var year = new Date().getFullYear()+parseInt(years);
-	    var amount = p + interest;
 		document.getElementById("result").innerHTML="If you deposit "+p+",\<br\>at an interest rate of "+rate+"%.\<br\>You will receive an amount of "+interest+",\<br\>in the year "+year+"\<br\>"
-        highlight(p);
-        highlight(rate);
-        highlight(""+interest);
-        highlight(""+year);
-        highlight(""+amount);
+        highlight(p,0);
+        highlight(rate,68);
+        highlight(""+year,20);
+        highlight(""+interest,128);
 
 	}
 }
