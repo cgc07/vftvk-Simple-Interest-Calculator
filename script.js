@@ -19,6 +19,17 @@ function valPrincipal()
 	}
 	return true;
 }
+
+function highlight(text) {
+  var inputText = document.getElementById("result");
+  var innerHTML = inputText.innerHTML;
+  var index = innerHTML.indexOf(text);
+  if (index >= 0) { 
+   innerHTML = innerHTML.substring(0,index) + "<span class='marca'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+   inputText.innerHTML = innerHTML;
+  }
+}
+
 // funcion para generar el calculo de interes ganado
 function compute()
 {
@@ -31,9 +42,12 @@ function compute()
 	    var interest = parseInt(years) * (parseInt(p) * (parseFloat(rate) /100));
 	    var year = new Date().getFullYear()+parseInt(years);
 	    var amount = p + interest;
-	    var marcaP=document. createElement("mark");
-	    marcaP.innerText=p;
-		document.getElementById("result").innerHTML="If you deposit "+marcaP+",\<br\>at an interest rate of "+rate+"%.\<br\>You will receive an amount of "+interest+",\<br\>in the year "+year+"\<br\>"
+		document.getElementById("result").innerHTML="If you deposit "+p+",\<br\>at an interest rate of "+rate+"%.\<br\>You will receive an amount of "+interest+",\<br\>in the year "+year+"\<br\>"
+        highlight(p);
+        highlight(rate);
+        highlight(""+interest);
+        highlight(""+year);
+        highlight(""+amount);
 
 	}
 }
